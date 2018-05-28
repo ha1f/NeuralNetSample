@@ -8,5 +8,8 @@
 
 import Foundation
 
-print("Hello, World!")
+let s1 = [1, 2, 3, 4, 5, 6]
+let s2 = [10, 20, 30, 40, 50, 60]
+let s3 = [100, 200, 300, 400, 500, 600].map { String($0) }
+print(zip(s1, s2, s3))
 
