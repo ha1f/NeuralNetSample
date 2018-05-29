@@ -9,10 +9,14 @@
 import Foundation
 import Accelerate
 
+protocol LaObjectWrapperType {
+    var raw: la_object_t { get }
+}
+
 /// 縦にrow、横にcolumn
 /// http://yamaimo.hatenablog.jp/entry/2016/03/28/200000
 /// la_retain, la_releaseは実装してないので謎
-struct Matrix {
+struct Matrix: LaObjectWrapperType {
     let raw: la_object_t
     
     /// 対角行列とかのときはヒントを指定するとはやくなるかも
@@ -34,9 +38,7 @@ struct Matrix {
     }
 }
 
-extension Matrix {
-    // MARK: - Getter
-    
+extension LaObjectWrapperType {
     var rows: la_count_t {
         return la_matrix_rows(raw)
     }
@@ -122,14 +124,17 @@ extension Matrix {
 extension Matrix {
     // MARK: - Slicing
     
+    /// 一部を取り出す
     func sliced(firstRow: la_index_t, firstCol: la_index_t, sliceRows: la_count_t, sliceCols: la_count_t, rowStride: la_index_t = 1, colStride: la_index_t = 1) -> Matrix? {
         return Matrix(la_matrix_slice(raw, firstRow, firstCol, rowStride, colStride, sliceRows, sliceCols))
     }
     
+    /// 横ベクトルを取り出す
     func vectorFromRow(_ row: la_count_t) -> Matrix? {
         return Matrix(la_vector_from_matrix_row(raw, row))
     }
     
+    /// 縦ベクトルを取り出す
     func vectorFromCol(_ col: la_count_t) -> Matrix? {
         return Matrix(la_vector_from_matrix_col(raw, col))
     }
@@ -139,7 +144,7 @@ extension Matrix {
     }
 }
 
-extension Matrix {
+extension LaObjectWrapperType {
     // MARK: - Transforming
     
     func transposed() -> Matrix? {
@@ -151,7 +156,30 @@ extension Matrix {
     }
 }
 
-extension Matrix {
+struct Vector {
+    let raw: la_object_t
+    
+    /// isColumn = trueなら縦ベクトル
+    init?(array: [Double], isColumn: Bool = true) {
+        let length = la_count_t(array.count)
+        if isColumn {
+            self.init(la_matrix_from_double_buffer(array, length, 1, 1, la_hint_t(LA_NO_HINT), la_attribute_t(LA_DEFAULT_ATTRIBUTES)))
+        } else {
+            self.init(la_matrix_from_double_buffer(array, 1, length, length, la_hint_t(LA_NO_HINT), la_attribute_t(LA_DEFAULT_ATTRIBUTES)))
+        }
+    }
+    
+    fileprivate init?(_ vector: la_object_t) {
+        guard la_status(vector) == LA_SUCCESS else {
+            debugPrint("Vector initializing error: \(la_status(vector))")
+            return nil
+        }
+        self.raw = vector
+    }
+}
+
+
+extension Vector: LaObjectWrapperType {
     // MARK: - For vectors
     
     var length: la_count_t {
@@ -159,21 +187,21 @@ extension Matrix {
     }
     
     /// 内積
-    static func innerProduct(_ lhs: Matrix, _ rhs: Matrix) -> Double? {
-        return Matrix(la_inner_product(lhs.raw, rhs.raw))?.getComponents().first
+    static func innerProduct(_ lhs: Vector, _ rhs: Vector) -> Double? {
+        return Vector(la_inner_product(lhs.raw, rhs.raw))?.getComponents().first
     }
     
     /// 外積
-    static func outerProduct(_ lhs: Matrix, _ rhs: Matrix) -> Matrix? {
-        return Matrix(la_outer_product(lhs.raw, rhs.raw))
+    static func outerProduct(_ lhs: Vector, _ rhs: Vector) -> Vector? {
+        return Vector(la_outer_product(lhs.raw, rhs.raw))
     }
     
     func norm(_ norm: la_norm_t = la_norm_t(LA_L1_NORM)) -> Double? {
         return la_norm_as_double(raw, norm)
     }
     
-    func normalized(_ norm: la_norm_t = la_norm_t(LA_L1_NORM)) -> Matrix? {
-        return Matrix(la_normalized_vector(raw, norm))
+    func normalized(_ norm: la_norm_t = la_norm_t(LA_L1_NORM)) -> Vector? {
+        return Vector(la_normalized_vector(raw, norm))
     }
     
 }
