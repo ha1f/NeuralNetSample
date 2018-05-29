@@ -33,20 +33,8 @@ struct Vector: LaObjectWrapperType {
 
 
 extension Vector {
-    // MARK: - For vectors
-    
     var length: la_count_t {
         return la_vector_length(raw)
-    }
-    
-    /// 内積
-    static func innerProduct(_ lhs: Vector, _ rhs: Vector) -> Double? {
-        return Vector(la_inner_product(lhs.raw, rhs.raw))?.getComponents().first
-    }
-    
-    /// 外積
-    static func outerProduct(_ lhs: Vector, _ rhs: Vector) -> Vector? {
-        return Vector(la_outer_product(lhs.raw, rhs.raw))
     }
     
     func norm(_ norm: la_norm_t = la_norm_t(LA_L1_NORM)) -> Double? {
@@ -56,6 +44,17 @@ extension Vector {
     func normalized(_ norm: la_norm_t = la_norm_t(LA_L1_NORM)) -> Vector? {
         return Vector(la_normalized_vector(raw, norm))
     }
+}
+
+extension Vector {
+    /// 内積
+    static func innerProduct(_ lhs: Vector, _ rhs: Vector) -> Double? {
+        return Vector(la_inner_product(lhs.raw, rhs.raw))?.getComponents().first
+    }
     
+    /// 外積
+    static func outerProduct(_ lhs: Vector, _ rhs: Vector) -> Vector? {
+        return Vector(la_outer_product(lhs.raw, rhs.raw))
+    }
 }
 
