@@ -12,6 +12,8 @@
 		567255F220BBB1CD008B0FBE /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567255F120BBB1CD008B0FBE /* Matrix.swift */; };
 		5676CEC420B7FECA00006176 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676CEC320B7FECA00006176 /* main.swift */; };
 		5676CECB20B7FEDF00006176 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676CECA20B7FEDF00006176 /* Layer.swift */; };
+		E95BC7AB20BD910000FBAEE5 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BC7AA20BD910000FBAEE5 /* Vector.swift */; };
+		E95BC7AD20BD914900FBAEE5 /* LaObjectWrapperType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +35,8 @@
 		5676CEC020B7FECA00006176 /* NeuralNetSample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NeuralNetSample; sourceTree = BUILT_PRODUCTS_DIR; };
 		5676CEC320B7FECA00006176 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5676CECA20B7FEDF00006176 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		E95BC7AA20BD910000FBAEE5 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaObjectWrapperType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				567255ED20BB9BC5008B0FBE /* Zip3Sequence.swift */,
 				567255EF20BBAA56008B0FBE /* Random.swift */,
 				567255F120BBB1CD008B0FBE /* Matrix.swift */,
+				E95BC7AA20BD910000FBAEE5 /* Vector.swift */,
+				E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */,
 			);
 			path = NeuralNetSample;
 			sourceTree = "<group>";
@@ -132,9 +138,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				567255F020BBAA56008B0FBE /* Random.swift in Sources */,
+				E95BC7AD20BD914900FBAEE5 /* LaObjectWrapperType.swift in Sources */,
 				567255F220BBB1CD008B0FBE /* Matrix.swift in Sources */,
 				567255EE20BB9BC5008B0FBE /* Zip3Sequence.swift in Sources */,
 				5676CEC420B7FECA00006176 /* main.swift in Sources */,
+				E95BC7AB20BD910000FBAEE5 /* Vector.swift in Sources */,
 				5676CECB20B7FEDF00006176 /* Layer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
