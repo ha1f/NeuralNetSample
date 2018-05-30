@@ -27,6 +27,35 @@ extension LaObjectWrapperType {
     }
 }
 
+extension LaObjectWrapperType {
+    // MARK: - Static Operator
+    
+    /// サイズが同じである必要がある
+    static func sum(_ lhs: Self, _ rhs: Self) -> Self? {
+        return Self(la_sum(lhs.raw, rhs.raw))
+    }
+    
+    /// サイズが同じである必要がある
+    static func difference(_ lhs: Self, _ rhs: Self) -> Self? {
+        return Self(la_difference(lhs.raw, rhs.raw))
+    }
+    
+    /// 積
+    static func product(_ lhs: LaObjectWrapperType, _ rhs: LaObjectWrapperType) -> Matrix? {
+        return Matrix(la_matrix_product(lhs.raw, rhs.raw))
+    }
+    
+    /// アダマール積
+    /// サイズが同じである必要がある
+    static func elementwiseProduct(_ lhs: Self, _ rhs: Self) -> Self? {
+        return Self(la_elementwise_product(lhs.raw, rhs.raw))
+    }
+    
+    // solve AX=B
+    static func solve(_ system: Matrix, _ rhs: LaObjectWrapperType) -> Matrix? {
+        return Matrix(la_solve(system.raw, rhs.raw))
+    }
+}
 
 extension LaObjectWrapperType {
     var rows: la_count_t {

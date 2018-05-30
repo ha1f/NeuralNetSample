@@ -37,16 +37,12 @@ struct Matrix: LaObjectWrapperType {
 extension Matrix {
     // MARK: - Static Builder
     
-    static func vector(_ array: [Double]) -> Matrix {
-        return Matrix(array: array, rows: la_count_t(array.count), cols: 1)!
-    }
-    
     static func identity(_ size: la_count_t) -> Matrix {
         return Matrix(la_identity_matrix(size, la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE), la_attribute_t(LA_DEFAULT_ATTRIBUTES)))!
     }
     
     static func diagonal(_ array: [Double], diagonal: la_index_t = 0) -> Matrix {
-        let vector = Matrix.vector(array)
+        let vector = Vector(array: array)!
         return Matrix(la_diagonal_matrix_from_vector(vector.raw, diagonal))!
     }
     
@@ -67,36 +63,6 @@ extension Matrix {
 }
 
 extension Matrix {
-    // MARK: - Static Operator
-    
-    /// サイズが同じである必要がある
-    static func sum(_ lhs: Matrix, _ rhs: Matrix) -> Matrix? {
-        return Matrix(la_sum(lhs.raw, rhs.raw))
-    }
-    
-    /// サイズが同じである必要がある
-    static func difference(_ lhs: Matrix, _ rhs: Matrix) -> Matrix? {
-        return Matrix(la_difference(lhs.raw, rhs.raw))
-    }
-    
-    /// 積
-    static func product(_ lhs: Matrix, _ rhs: Matrix) -> Matrix? {
-        return Matrix(la_matrix_product(lhs.raw, rhs.raw))
-    }
-    
-    /// アダマール積
-    /// サイズが同じである必要がある
-    static func elementwiseProduct(_ lhs: Matrix, _ rhs: Matrix) -> Matrix? {
-        return Matrix(la_elementwise_product(lhs.raw, rhs.raw))
-    }
-    
-    // solve AX=B
-    static func solve(_ system: Matrix, _ rhs: Matrix) -> Matrix? {
-        return Matrix(la_solve(system.raw, rhs.raw))
-    }
-}
-
-extension Matrix {
     // MARK: - Slicing
     
     /// 一部を取り出す
@@ -105,16 +71,26 @@ extension Matrix {
     }
     
     /// 横ベクトルを取り出す
-    func vectorFromRow(_ row: la_count_t) -> Matrix? {
-        return Matrix(la_vector_from_matrix_row(raw, row))
+    func vectorFromRow(_ row: la_count_t) -> Vector? {
+        return Vector(la_vector_from_matrix_row(raw, row))
     }
     
     /// 縦ベクトルを取り出す
-    func vectorFromCol(_ col: la_count_t) -> Matrix? {
-        return Matrix(la_vector_from_matrix_col(raw, col))
+    func vectorFromCol(_ col: la_count_t) -> Vector? {
+        return Vector(la_vector_from_matrix_col(raw, col))
     }
     
-    func vectorFromDiagonal(_ diagonal: la_index_t = 0) -> Matrix? {
-        return Matrix(la_vector_from_matrix_diagonal(raw, diagonal))
+    func vectorFromDiagonal(_ diagonal: la_index_t = 0) -> Vector? {
+        return Vector(la_vector_from_matrix_diagonal(raw, diagonal))
+    }
+    
+    func asVector() -> Vector? {
+        let components = getComponents()
+        if cols == 1 {
+            return Vector(array: components, isColumn: true)
+        } else if rows == 1 {
+            return Vector(array: components, isColumn: false)
+        }
+        return nil
     }
 }
