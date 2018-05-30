@@ -32,34 +32,31 @@ struct Matrix: LaObjectWrapperType {
         }
         self.raw = matrix
     }
+    
+    func asVector() -> Vector? {
+        if cols == 1 {
+            return vectorFromRow(0)
+        } else if rows == 1 {
+            return vectorFromCol(0)
+        }
+        return nil
+    }
 }
 
 extension Matrix {
     // MARK: - Static Builder
     
+    /// 単位行列
     static func identity(_ size: la_count_t) -> Matrix {
         return Matrix(la_identity_matrix(size, la_scalar_type_t(LA_SCALAR_TYPE_DOUBLE), la_attribute_t(LA_DEFAULT_ATTRIBUTES)))!
     }
     
+    /// 対角行列
     static func diagonal(_ array: [Double], diagonal: la_index_t = 0) -> Matrix {
         let vector = Vector(array: array)!
         return Matrix(la_diagonal_matrix_from_vector(vector.raw, diagonal))!
     }
     
-    /// splatはサイズを持たないが、全ての要素がvalueとみなされる行列
-    static func splat(fromValue value: Double) -> Matrix {
-        return Matrix(la_splat_from_double(value, la_attribute_t(LA_DEFAULT_ATTRIBUTES)))!
-    }
-    
-    /// splatをベクトルの要素から生成
-    static func splat(fromElementOf vector: Matrix, index: la_index_t) -> Matrix? {
-        return Matrix(la_splat_from_vector_element(vector.raw, index))
-    }
-    
-    /// splatをmatrixの要素から生成
-    static func splat(fromElementOf matrix: Matrix, row: la_index_t, col: la_index_t) -> Matrix? {
-        return Matrix(la_splat_from_matrix_element(matrix.raw, row, col))
-    }
 }
 
 extension Matrix {
@@ -80,17 +77,8 @@ extension Matrix {
         return Vector(la_vector_from_matrix_col(raw, col))
     }
     
+    /// 対角線ベクトルを取り出す
     func vectorFromDiagonal(_ diagonal: la_index_t = 0) -> Vector? {
         return Vector(la_vector_from_matrix_diagonal(raw, diagonal))
-    }
-    
-    func asVector() -> Vector? {
-        let components = getComponents()
-        if cols == 1 {
-            return Vector(array: components, isColumn: true)
-        } else if rows == 1 {
-            return Vector(array: components, isColumn: false)
-        }
-        return nil
     }
 }

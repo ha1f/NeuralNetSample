@@ -22,7 +22,6 @@ public struct Zip3Iterator<Iterator1, Iterator2, Iterator3> where Iterator1 : It
 }
 
 extension Zip3Iterator : IteratorProtocol {
-    
     /// The type of element returned by `next()`.
     public typealias Element = (Iterator1.Element, Iterator2.Element, Iterator3.Element)
     
@@ -54,7 +53,6 @@ public struct Zip3Sequence<Sequence1, Sequence2, Sequence3> where Sequence1 : Se
 }
 
 extension Zip3Sequence : Sequence {
-    
     /// A type whose instances can produce the elements of this
     /// sequence, in order.
     public typealias Iterator = Zip3Iterator<Sequence1.Iterator, Sequence2.Iterator, Sequence3.Iterator>

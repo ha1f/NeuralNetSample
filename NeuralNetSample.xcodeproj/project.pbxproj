@@ -10,8 +10,14 @@
 		567255EE20BB9BC5008B0FBE /* Zip3Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567255ED20BB9BC5008B0FBE /* Zip3Sequence.swift */; };
 		567255F020BBAA56008B0FBE /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567255EF20BBAA56008B0FBE /* Random.swift */; };
 		567255F220BBB1CD008B0FBE /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567255F120BBB1CD008B0FBE /* Matrix.swift */; };
+		5676511520BE37DE005EB809 /* Splat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676511420BE37DE005EB809 /* Splat.swift */; };
+		5676511C20BE393C005EB809 /* IdentityLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676511B20BE393C005EB809 /* IdentityLayer.swift */; };
+		5676511E20BE3952005EB809 /* LayerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676511D20BE3952005EB809 /* LayerType.swift */; };
+		5676512020BE396C005EB809 /* ReLULayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676511F20BE396C005EB809 /* ReLULayer.swift */; };
+		5676512220BE3983005EB809 /* SigmoidLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676512120BE3983005EB809 /* SigmoidLayer.swift */; };
+		5676512420BE399C005EB809 /* AffineLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676512320BE399C005EB809 /* AffineLayer.swift */; };
 		5676CEC420B7FECA00006176 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676CEC320B7FECA00006176 /* main.swift */; };
-		5676CECB20B7FEDF00006176 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676CECA20B7FEDF00006176 /* Layer.swift */; };
+		5676CECB20B7FEDF00006176 /* TwoLayerNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5676CECA20B7FEDF00006176 /* TwoLayerNet.swift */; };
 		E95BC7AB20BD910000FBAEE5 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BC7AA20BD910000FBAEE5 /* Vector.swift */; };
 		E95BC7AD20BD914900FBAEE5 /* LaObjectWrapperType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */; };
 /* End PBXBuildFile section */
@@ -32,9 +38,15 @@
 		567255ED20BB9BC5008B0FBE /* Zip3Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zip3Sequence.swift; sourceTree = "<group>"; };
 		567255EF20BBAA56008B0FBE /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		567255F120BBB1CD008B0FBE /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
+		5676511420BE37DE005EB809 /* Splat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splat.swift; sourceTree = "<group>"; };
+		5676511B20BE393C005EB809 /* IdentityLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityLayer.swift; sourceTree = "<group>"; };
+		5676511D20BE3952005EB809 /* LayerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerType.swift; sourceTree = "<group>"; };
+		5676511F20BE396C005EB809 /* ReLULayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReLULayer.swift; sourceTree = "<group>"; };
+		5676512120BE3983005EB809 /* SigmoidLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigmoidLayer.swift; sourceTree = "<group>"; };
+		5676512320BE399C005EB809 /* AffineLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffineLayer.swift; sourceTree = "<group>"; };
 		5676CEC020B7FECA00006176 /* NeuralNetSample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NeuralNetSample; sourceTree = BUILT_PRODUCTS_DIR; };
 		5676CEC320B7FECA00006176 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		5676CECA20B7FEDF00006176 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		5676CECA20B7FEDF00006176 /* TwoLayerNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoLayerNet.swift; sourceTree = "<group>"; };
 		E95BC7AA20BD910000FBAEE5 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaObjectWrapperType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +62,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5676511620BE38A2005EB809 /* Accelerate */ = {
+			isa = PBXGroup;
+			children = (
+				E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */,
+				5676511420BE37DE005EB809 /* Splat.swift */,
+				567255F120BBB1CD008B0FBE /* Matrix.swift */,
+				E95BC7AA20BD910000FBAEE5 /* Vector.swift */,
+			);
+			path = Accelerate;
+			sourceTree = "<group>";
+		};
+		5676511720BE38B6005EB809 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5676511A20BE3922005EB809 /* Zip3 */,
+				5676511920BE390F005EB809 /* Layer */,
+				5676511820BE38C4005EB809 /* Random */,
+				5676511620BE38A2005EB809 /* Accelerate */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5676511820BE38C4005EB809 /* Random */ = {
+			isa = PBXGroup;
+			children = (
+				567255EF20BBAA56008B0FBE /* Random.swift */,
+			);
+			path = Random;
+			sourceTree = "<group>";
+		};
+		5676511920BE390F005EB809 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				5676CECA20B7FEDF00006176 /* TwoLayerNet.swift */,
+				5676511B20BE393C005EB809 /* IdentityLayer.swift */,
+				5676511D20BE3952005EB809 /* LayerType.swift */,
+				5676511F20BE396C005EB809 /* ReLULayer.swift */,
+				5676512120BE3983005EB809 /* SigmoidLayer.swift */,
+				5676512320BE399C005EB809 /* AffineLayer.swift */,
+			);
+			path = Layer;
+			sourceTree = "<group>";
+		};
+		5676511A20BE3922005EB809 /* Zip3 */ = {
+			isa = PBXGroup;
+			children = (
+				567255ED20BB9BC5008B0FBE /* Zip3Sequence.swift */,
+			);
+			path = Zip3;
+			sourceTree = "<group>";
+		};
 		5676CEB720B7FECA00006176 = {
 			isa = PBXGroup;
 			children = (
@@ -69,13 +132,8 @@
 		5676CEC220B7FECA00006176 /* NeuralNetSample */ = {
 			isa = PBXGroup;
 			children = (
+				5676511720BE38B6005EB809 /* Common */,
 				5676CEC320B7FECA00006176 /* main.swift */,
-				5676CECA20B7FEDF00006176 /* Layer.swift */,
-				567255ED20BB9BC5008B0FBE /* Zip3Sequence.swift */,
-				567255EF20BBAA56008B0FBE /* Random.swift */,
-				567255F120BBB1CD008B0FBE /* Matrix.swift */,
-				E95BC7AA20BD910000FBAEE5 /* Vector.swift */,
-				E95BC7AC20BD914900FBAEE5 /* LaObjectWrapperType.swift */,
 			);
 			path = NeuralNetSample;
 			sourceTree = "<group>";
@@ -138,12 +196,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				567255F020BBAA56008B0FBE /* Random.swift in Sources */,
+				5676512420BE399C005EB809 /* AffineLayer.swift in Sources */,
 				E95BC7AD20BD914900FBAEE5 /* LaObjectWrapperType.swift in Sources */,
+				5676512220BE3983005EB809 /* SigmoidLayer.swift in Sources */,
+				5676511C20BE393C005EB809 /* IdentityLayer.swift in Sources */,
+				5676511E20BE3952005EB809 /* LayerType.swift in Sources */,
+				5676511520BE37DE005EB809 /* Splat.swift in Sources */,
 				567255F220BBB1CD008B0FBE /* Matrix.swift in Sources */,
 				567255EE20BB9BC5008B0FBE /* Zip3Sequence.swift in Sources */,
+				5676512020BE396C005EB809 /* ReLULayer.swift in Sources */,
 				5676CEC420B7FECA00006176 /* main.swift in Sources */,
 				E95BC7AB20BD910000FBAEE5 /* Vector.swift in Sources */,
-				5676CECB20B7FEDF00006176 /* Layer.swift in Sources */,
+				5676CECB20B7FEDF00006176 /* TwoLayerNet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
