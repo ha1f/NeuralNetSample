@@ -8,8 +8,8 @@
 
 import Foundation
 
-let s1 = [1, 2, 3, 4, 5, 6]
-let s2 = [10, 20, 30, 40, 50, 60]
-let s3 = [100, 200, 300, 400, 500, 600].map { String($0) }
-print(zip(s1, s2, s3))
+let m1 = Matrix(array: [1, 2, 3, 4], rows: 2, cols: 2)!
+let m2 = Matrix(array: [5, 6, 7, 8], rows: 2, cols: 2)!
+
+debugPrint(Matrix.product(m1, m2))
 

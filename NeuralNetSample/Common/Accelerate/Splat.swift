@@ -11,29 +11,29 @@ import Accelerate
 
 /// サイズを持たないが、全ての要素がvalueとみなされる行列
 struct Splat: LaObjectWrapperType {
-    let raw: la_object_t
+    let rawValue: la_object_t
     
     init?(value: Double) {
-        self.init(la_splat_from_double(value, la_attribute_t(LA_DEFAULT_ATTRIBUTES)))
+        self.init(rawValue: la_splat_from_double(value, la_attribute_t(LA_DEFAULT_ATTRIBUTES)))
     }
     
-    init?(_ matrix: la_object_t) {
+    init?(rawValue matrix: la_object_t) {
         guard la_status(matrix) == LA_SUCCESS else {
             debugPrint("Matrix initializing error: \(la_status(matrix))")
             return nil
         }
-        self.raw = matrix
+        self.rawValue = matrix
     }
 }
 
 extension Splat {
     /// splatをベクトルの要素から生成
     static func from(elementOf vector: Vector, index: la_index_t) -> Splat? {
-        return Splat(la_splat_from_vector_element(vector.raw, index))
+        return Splat(rawValue: la_splat_from_vector_element(vector.rawValue, index))
     }
     
     /// splatをmatrixの要素から生成
     static func from(elementOf matrix: Matrix, row: la_index_t, col: la_index_t) -> Splat? {
-        return Splat(la_splat_from_matrix_element(matrix.raw, row, col))
+        return Splat(rawValue: la_splat_from_matrix_element(matrix.rawValue, row, col))
     }
 }
