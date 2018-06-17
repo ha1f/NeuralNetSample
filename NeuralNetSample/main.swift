@@ -8,8 +8,14 @@
 
 import Foundation
 
-let m1 = Matrix(array: [1, 2, 3, 4], rows: 2, cols: 2)!
-let m2 = Matrix(array: [5, 6, 7, 8], rows: 2, cols: 2)!
+let layer = AffineLayer(weights: Matrix(array: [1, 2, 3, 4, 5, 6], rows: 2, cols: 3)!, biass: Vector(array: [0.1, 0.2, 0.3], isColumn: false)!)
 
-debugPrint(Matrix.product(m1, m2))
+// 1 * 1 + 2 * 4 + 0.1 = 9.1
+// 1 * 2 + 2 * 5 + 0.2 = 12.2
+// 1 * 3 + 2 * 6 + 0.3 = 15.3
+print(layer.forward([1, 2]))
+
+// 1 * 1 + 2 * 2 + 3 * 3 = 14
+// 1 * 4 + 2 * 5 + 3 * 6 = 32
+print(layer.backward([1, 2, 3]))
 

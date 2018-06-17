@@ -31,6 +31,12 @@ struct Vector: LaObjectWrapperType {
     }
 }
 
+extension Vector: CustomDebugStringConvertible {
+    var debugDescription: String {
+        return "Vector(rows: \(rows), cols: \(cols), \(getComponents())"
+    }
+}
+
 
 extension Vector {
     var length: la_count_t {

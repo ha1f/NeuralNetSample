@@ -35,9 +35,9 @@ struct Matrix: LaObjectWrapperType {
     
     func asVector() -> Vector? {
         if cols == 1 {
-            return Vector.fromRow(of: self, at: 0)
-        } else if rows == 1 {
             return Vector.fromCol(of: self, at: 0)
+        } else if rows == 1 {
+            return Vector.fromRow(of: self, at: 0)
         }
         return nil
     }
