@@ -68,9 +68,9 @@ extension LaObjectWrapperType {
     }
     
     func getComponents() -> [Double] {
-        let rows = self.rows
-        var buffer = [Double](repeating: 0, count: Int(rows * cols))
-        la_matrix_to_double_buffer(&buffer, rows, rawValue)
+        let cols = self.cols
+        var buffer = [Double](repeating: 0, count: Int(cols * rows))
+        la_matrix_to_double_buffer(&buffer, cols, rawValue)
         return buffer
     }
 }

@@ -28,11 +28,21 @@ class AffineLayer: LayerType {
         self.biass = Vector(array: biass, isColumn: false)!
     }
     
+    func forward(batchInput input: Matrix) -> Matrix {
+        // biasを行列に拡張（縦に同じ要素を繰り返す）
+        let dataCount = input.rows
+        let biasComponents = biass.getComponents()
+        let bias = Matrix(array: (0..<Int(dataCount)).flatMap { _ in biasComponents }, rows: dataCount, cols: biass.cols)!
+        
+        return Matrix.sum(Matrix.product(input, weights)!, bias)!
+    }
+    
+    func backward(batchInput input: Matrix) -> Matrix {
+        return Matrix.product(input, weights.transposed()!)!
+    }
+    
     func forward(_ input: [Double]) -> [Double] {
         let inputVector = Vector(array: input, isColumn: false)!
-        print(Matrix.product(inputVector, weights))
-        print(Matrix.product(inputVector, weights)?.asVector())
-        print(Vector.sum(Matrix.product(inputVector, weights)!.asVector()!, biass))
         return Vector.sum(Matrix.product(inputVector, weights)!.asVector()!, biass)!.getComponents()
     }
     
